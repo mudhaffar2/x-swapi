@@ -1,0 +1,110 @@
+*,
+*:before,
+*:after {
+  box-sizing:border-box;
+}
+
+html {
+  height:100vh;
+}
+
+body {
+  font-family:sans-serif;
+  line-height:18px;
+  color:#999;
+  background-color:white;
+  display:flex;
+  flex-direction:column;
+  margin:0;
+  height:100%;
+  background-image:url('background.gif');
+  background-attachment:fixed;
+}
+
+a,
+a:link,
+a:hover,
+a:visited {
+  color:white;
+  text-decoration:none;
+}
+
+h1,
+h2,
+h3 {
+  margin:10px;
+  font-weight:500;
+}
+
+header,
+footer {
+  color:#333;
+  background-color:rgba(204, 204, 204, 0.8);
+}
+
+body>header,
+body>footer {
+  padding-left:0;
+  padding-right:0;
+}
+
+body>header,
+body>footer {
+  padding-top:15px;
+  padding-bottom:15px;
+}
+
+body>header {
+  border-bottom:1px solid yellow;
+  margin-top: 38px
+}
+
+main {
+  flex-grow:4;
+  overflow:auto;
+  display:flex;
+  flex-wrap:wrap;
+}
+
+body>footer {
+  border-top:1px solid yellow;
+}
+
+.person {
+  width:48%;
+  margin:1%;
+  background-color:rgba( 0, 0, 0, 0.8);
+  border:1px solid yellow;
+  border-radius:3px;
+}
+
+.person>header,
+.person>div {
+  padding:1px;
+}
+
+.person>header {
+  border-bottom:1px solid yellow;
+}
+
+.person ul {
+  padding:5px;
+}
+
+.person li {
+  display:flex;
+  padding:5px;
+}
+
+.person .label {
+  flex-grow:0;
+  width:30%;
+}
+
+.person .gender {
+  color:black;
+}
+
+.person .value {
+  color:rgb(88, 165, 216);
+}
