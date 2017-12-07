@@ -1,8 +1,9 @@
 var mainElement = document.querySelector('main');
+var swapi = 'https://swapi.co/api/people/';
 //
-function loadPeople(done) {
+function loadPeople(swapiUrl, done) {
   var xhttp = new XMLHttpRequest();
-  xhttp.open('GET', 'https://swapi.co/api/people/', false);
+  xhttp.open('GET', swapiUrl, false);
   xhttp.send();
   var response = JSON.parse(xhttp.responseText);
   done(response);
@@ -15,8 +16,31 @@ function loadPeople(done) {
 }
 //
 function renderPeople(data) {
+  mainElement.innerHTML = '';
+  var navElement = document.createElement('nav');
+  if (data.previous !== null) {
+    var previousButton = document.createElement('button');
+    previousButton.textContent = '<-- Previous';
+    previousButton.classList.add('previous');
+    previousButton.addEventListener('click', function() {
+      loadPeople(data.previous, renderPeople);
+    });
+    navElement.appendChild(previousButton);
+  }
+  if (data.next !== null) {
+    var nextButton = document.createElement('button');
+    nextButton.textContent = 'Next -->';
+    nextButton.classList.add('next');
+    nextButton.addEventListener('click', function() {
+      loadPeople(data.next, renderPeople);
+    });
+    navElement.appendChild(nextButton);
+  }
+  mainElement.appendChild(navElement);
   var people = data.results;
-  console.log(people);
+  console.log(data);
+  var divCards = document.createElement('div');
+  divCards.classList.add('cards');
   people.forEach(function(person) {
     var sectionElement = document.createElement('section');
     sectionElement.classList.add('person');
@@ -43,8 +67,9 @@ function renderPeople(data) {
                                     <li><span class='label'>Mass:</span><span class='value'>${person.mass}kg</span></li>
                                   </ul>
                                 </div>`;
-    mainElement.appendChild(sectionElement);
+    divCards.appendChild(sectionElement);
   });
+  mainElement.appendChild(divCards);
   /*
     fill here
     ---------
@@ -65,5 +90,17 @@ function renderPeople(data) {
       - Add the section element to the main element of the index.html
   */
 }
+
 // call the loadPeople with the renderPeople function as parameter
-loadPeople(renderPeople);
+  loadPeople(swapi, renderPeople);
+
+
+
+
+
+
+
+
+
+
+
